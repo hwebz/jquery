@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        blockquote { background: #ccc; color: #fff; padding: 15px; font-size: 28px; width: 25%; float: right; }
+    </style>
+</head>
+<body>
+
+    <article>
+        <h1>My Awesome Post</h1>
+        <p class="origin">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae eius magni quasi similique nihil in molestias earum. Dignissimos, deserunt repellat consectetur reiciendis et labore. Officia temporibus accusantium non nihil fuga.
+        </p>
+        <p class="origin">
+            <span class=co>Lorem ipsum dolor sit amet</span>, consectetur adipisicing elit. Blanditiis qui harum pariatur sapiente tempore alias hic neque commodi nam corporis dolorum ducimus obcaecati error molestiae dolor unde totam, fugiat ipsa.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error corporis temporibus quae autem modi quisquam molestiae iusto eius at fugit, dolore beatae, iste, expedita ipsam vel deleniti eligendi ex nobis.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum et dolorem eaque mollitia numquam iste impedit, totam sunt vitae fuga maiores, expedita exercitationem iusto, amet alias voluptas facere asperiores. Neque?
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt eveniet, fuga voluptatum eum placeat deserunt consequatur ut illo cumque error molestias quas, iusto magni, blanditiis nisi odio ex mollitia. Nesciunt?
+            <span class="co">Quote from famous author abouy anything you want</span>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aliquam voluptates, voluptas perspiciatis nihil, quidem aliquid soluta consequuntur quo totam esse dicta optio cum deleniti obcaecati, eius sunt neque autem.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium dolore iste assumenda, beatae magnam inventore culpa voluptates nobis laborum unde modi impedit voluptatum ad possimus aut illo nisi, iure quidem.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto esse soluta nesciunt architecto optio veniam dolorum laborum assumenda. Iste nobis commodi dolore facilis, nihil sunt aut omnis praesentium aliquid debitis?
+        </p>
+    </article>
+
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    
+    <script type="text/javascript">
+        (function() {
+            
+            $('article').append('<p>Hello from JavaScript append()</p>');
+            $('article').prepend('<p>Hello from JavaScript prepend()</p>');
+            $('h1').after('<p>Hello from JavaScript after Heading 1 tag</p>');
+            $('.origin').first().before('<p>Hello from JavaScript before first paragraph tag</p>');
+
+            $('<h2>Hi Form JavaScript</h2>').appendTo('article');
+            $('<h2></h2>', {
+                text: 'Hello from JavaScript 2',
+                class: 'myClass'
+            }).prependTo('article');
+
+            $('<h3>Hi From JavaScript 3</h3>').insertAfter('article h1');
+            $('<h4></h4>', {
+                text: 'Hi from JavaScript 4',
+                class: 'myAnotherClass'
+            }).insertBefore('article h1');
+
+            // Move DOM Elements
+            $('h1').appendTo('article');
+
+            var co = $('span.co').each(function() {
+                var $this = $(this);
+                $('<blockquote></blockquote>', {
+                    class: 'co',
+                    text: $(this).text()
+                }).prependTo($this.closest('p'));
+            });
+        })();
+    </script>
+</body>
+</html>

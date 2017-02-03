@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+
+    <a href="about.html">Load About page</a>
+    <a href="contact.html">Load Contact page</a>
+
+    <div class="loadedContent"></div>
+
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    
+    <script type="text/javascript">
+        (function($) {
+           
+           $('a').on('click', function(event) {
+               event.preventDefault();
+               var target = $(this).attr('href');
+               $('.loadedContent').load(target + ' .container');
+           });
+
+        })(jQuery);
+    </script>
+</body>
+</html>

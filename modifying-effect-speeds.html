@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        p {
+            margin: 0 0 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Reveal</h1>
+    <div class="content">
+        <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum animi veniam aspernatur sed alias reprehenderit dolore ipsam ab? Autem impedit unde, natus maxime ipsa accusamus reiciendis fugit iusto sequi totam?</span>
+        <span>Magnam molestiae quaerat quia tenetur adipisci nesciunt culpa, quidem eveniet itaque, sint ut expedita. Ut, temporibus adipisci, numquam distinctio tempora harum suscipit fugit eos, omnis quam a sed in ab?</span>
+        <span>Et itaque similique accusantium. Enim asperiores sint soluta ex fugiat temporibus aliquid amet, cumque dolore quisquam, nisi animi, maiores vitae quae numquam minus in. Cum doloremque minima vitae molestias sit?</span>
+        <span>Ullam iusto optio iure, esse ab quam dignissimos beatae qui tenetur eaque, vero dolorem ad saepe harum sit quod facere explicabo. Nostrum commodi inventore voluptate a ducimus perspiciatis, placeat quo.</span>
+        <span>Temporibus nihil voluptas libero alias repudiandae consectetur molestiae delectus, ut dignissimos? Sapiente dolorem, pariatur modi repellat ducimus, reprehenderit consequuntur rem placeat doloribus suscipit inventore! Deserunt, veritatis id laboriosam accusamus sit.</span></p>
+        <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, esse? Ad ex, enim nobis vel non cum harum vitae illum necessitatibus corporis atque nostrum, qui, repudiandae quasi accusamus ab id!</span>
+        <span>Omnis unde aperiam nihil. Laudantium eaque libero enim deleniti consequuntur maxime necessitatibus, ab, veniam neque dolorem sapiente! Voluptatem vero maiores tenetur exercitationem, vel. Fugit maiores non numquam debitis, deserunt iste.</span>
+        <span>Similique possimus, obcaecati dolorum fugiat esse voluptate ipsum eaque cum quo, dicta, nihil, sed hic quod earum asperiores omnis harum. Eum voluptas inventore minima nostrum, sapiente ullam, alias est veritatis.</span>
+        <span>Tempora dignissimos itaque maiores molestiae, perferendis nihil recusandae voluptate officia facilis dolores eligendi, quos, repellendus ullam totam. A reprehenderit, laudantium asperiores ad quaerat similique unde in fugiat aliquid, possimus non!</span>
+        <span>Sunt mollitia at veritatis sapiente tempora cupiditate quis omnis fuga commodi, suscipit maxime voluptates quibusdam corporis quia! Dolor magnam, odit voluptas similique quibusdam, blanditiis rerum at perspiciatis veniam maxime nemo.</span></p>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    
+    <script type="text/javascript">
+        $('div.content').hide();
+        // $.fx.speeds._default = 2000;
+        $.fx.speeds.tortoise = 5000;
+        $('h1').on('click', function() {
+            // $(this).next().slideToggle('_default');
+            $(this).next().slideToggle('tortoise');
+        });
+
+    </script>
+</body>
+</html>

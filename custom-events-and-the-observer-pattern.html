@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+
+    
+
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    
+    <script type="text/javascript">
+        (function($) {
+            /*$(document.body).on('app/x', function() {
+                console.log('clicked');
+            });
+
+            $(document.body).trigger('app/x');*/
+
+            var o = $( {} );
+
+            $.each({
+                trigger: 'publish',
+                on: 'subscribe',
+                off: 'unsubscribe'
+            }, function(key, val) {
+                jQuery[val] = function() {
+                    o[key].apply(o, arguments);
+                }
+            });
+
+        })(jQuery);
+
+        $.getJSON('https://newsapi.org/v1/articles?source=bild&sortBy=top&apiKey=418d54751e6c4554955ad3e999302dbb', function(results) {
+            // any processing you want
+            // $(document).trigger('twitter/results', results); // publish
+            $.publish('twitter/results', results);
+        });
+
+        /*$(document).on('twitter/results', function(e, results) { // subscribe
+            console.log(results);
+        });*/
+        $.subscribe('twitter/results', function(e, results) {
+            console.log(results.articles);
+            $('body').html(
+                $.map(results.articles, function(obj, index) {
+                    return '<li>' + obj.title + '</li>';
+                }).join('')
+            );
+        });
+    </script>
+</body>
+</html>

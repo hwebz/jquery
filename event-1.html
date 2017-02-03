@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="day.css">
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+
+    <h1>My Website</h1>
+
+    <button data-file="day">Day</button>
+    <button data-file="night">Night</button>
+
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    
+    <script type="text/javascript">
+        (function() {
+            var link = $('link');
+            $('button').click(function() {
+                // console.log('click');
+                // $("link").attr("href", $(this).text().toLowerCase() + ".css");
+                var $this = $(this);
+                var cssSrc = $this.data("file");
+
+                link.attr("href", cssSrc + ".css");
+
+                $this
+                    .siblings('button')
+                        .removeAttr('disabled')
+                    .end()
+                    .attr('disabled', 'disabled');
+            });
+        })();
+    </script>
+</body>
+</html>

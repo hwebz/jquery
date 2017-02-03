@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .box {
+            padding: 30px;
+            background: red;
+            display: block;
+            width: 500px;
+            position: relative;
+            margin: 15px;
+            transition: border-radius .5s ease-in;
+        }
+        .rounded-corner { border-radius: 30px; }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h1>Reveal</h1>
+        <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum animi veniam aspernatur sed alias reprehenderit dolore ipsam ab? Autem impedit unde, natus maxime ipsa accusamus reiciendis fugit iusto sequi totam?</span>
+        <span>Magnam molestiae quaerat quia tenetur adipisci nesciunt culpa, quidem eveniet itaque, sint ut expedita. Ut, temporibus adipisci, numquam distinctio tempora harum suscipit fugit eos, omnis quam a sed in ab?</span></p>
+    </div>
+    <button>Center</button>
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    
+    <script type="text/javascript">
+        (function() {
+            var box = $("div.box"),
+                fontSize = parseInt(box.css('font-size'), 10),
+                w = $(window).width() / 2 - box.outerWidth() / 2,
+                h = $(window).height() / 2 - box.outerHeight() / 2;
+
+            /*$('button').on('click', function() {
+                box.animate({fontSize: '+=5'}, {
+                    duration: 3000,
+                    complete: function() {
+                        console.log('done');
+                    },
+                    step: function() {
+                        console.log("Step at font-size: " + box.css('font-size'));
+                    }
+                })
+                .animate({ top: 500 }, { duration: 2000, queue: true });
+            });*/
+
+            $('button').on('click', function(event) {
+                event.preventDefault();
+                box.animate({
+                    left: w,
+                    position: 'absolute'
+                })
+                .animate({
+                    top: h
+                }, { 
+                    duration: 200, 
+                    queue: true, 
+                    complete: function() {
+                        $(this).addClass('rounded-corner');
+                    } 
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

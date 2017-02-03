@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .box {
+            padding: 30px;
+            background: red;
+            display: block;
+            width: 500px;
+            position: relative;
+            margin: 15px;
+            transition: border-radius .5s ease-in;
+        }
+        .rounded-corner { border-radius: 30px; }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h1>Reveal</h1>
+        <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum animi veniam aspernatur sed alias reprehenderit dolore ipsam ab? Autem impedit unde, natus maxime ipsa accusamus reiciendis fugit iusto sequi totam?</span>
+        <span>Magnam molestiae quaerat quia tenetur adipisci nesciunt culpa, quidem eveniet itaque, sint ut expedita. Ut, temporibus adipisci, numquam distinctio tempora harum suscipit fugit eos, omnis quam a sed in ab?</span></p>
+    </div>
+    <button>Center</button>
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    
+    <script type="text/javascript">
+        (function() {
+            var box = $('div.box');
+
+            $.fn.fadeSlideToggle = function(speed, fn) {
+                /*if ($.isFunction(fn)) {
+                    console.log('is a function');
+                } else {
+                    console.log('is not function');
+                }*/
+                // fadeToggle = opacity
+                // slideToggle = height
+                return $(this).animate({
+                    height: 'toggle',
+                    opacity: 'toggle'
+                }, speed || 500, function() {
+                    $.isFunction(fn) && fn.call(this);
+                });
+            }
+
+            $('button').on('click', function(event) {
+                event.preventDefault();
+                box.fadeSlideToggle(1000, function() {
+                    console.log('Finished');
+                }).addClass('custom');
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        body {
+            width: 500px;
+            margin: 100px auto 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #slider-nav {
+            display: none;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        #slider-nav button {
+            padding: 15px;
+            margin-right: 15px;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            display: inline-block;
+            width: 90px;
+            background-color: #ccc;
+        }
+
+        #slider-nav button:hover {
+            background-color: #ddd;
+        }
+
+        .slider {
+            width: inherit;
+            height: 200px;
+            overflow: scroll;
+        }
+
+        .slider ul {
+            width: 10000px;
+            list-style: none;
+            font-size: 0;
+        }
+
+        .slider ul li {
+            display: inline-block;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider">
+        <ul>
+            <li><img src="http://placehold.it/500x200&text=Image+Slider+1" alt=""></li>
+            <li><img src="http://placehold.it/500x200&text=Image+Slider+2" alt=""></li>
+            <li><img src="http://placehold.it/500x200&text=Image+Slider+3" alt=""></li>
+            <li><img src="http://placehold.it/500x200&text=Image+Slider+4" alt=""></li>
+        </ul>
+    </div>
+
+    <div id="slider-nav">
+        <button data-dir="prev">Previous</button>
+        <button data-dir="next">Next</button>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    
+    <script type="text/javascript">
+        (function($) {
+            function Slider(container, nav) {
+                this.container = container;
+                this.nav = nav;
+
+                this.imgs = this.container.find('img');
+                this.imgWidth = this.imgs[0].width; // 500
+                this.imgsLen = this.imgs.length;
+
+                this.current = 0;
+            }
+
+            Slider.prototype.transition = function(coords){
+                console.log(-(this.current * this.imgWidth));
+                this.container.animate({
+                marginLeft : coords ||  -(this.current * this.imgWidth)
+                });
+            };
+
+            Slider.prototype.setCurrent = function(dir) {
+                var pos = this.current;
+                pos += (~~(dir == 'next') || -1); // ~~(false) = 0, ~~(true) = 1
+                this.current = (pos < 0) ? this.imgsLen - 1 : pos % this.imgsLen;
+                return pos;
+            };
+
+            var container = $('div.slider').css('overflow', 'hidden').children('ul');
+            var slider = new Slider(container, $('#slider-nav'));
+            slider.nav.show().find('button').on('click', function(event) {
+                event.preventDefault();
+                slider.setCurrent($(this).data('dir'));
+                slider.transition();
+            });
+        })(jQuery);
+    </script>
+</body>
+</html>

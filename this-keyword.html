@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+
+    <a href="#">Click Me</a>
+
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    
+    <script type="text/javascript">
+        // (function doSomething() {
+        //     console.log(this);
+        // })();
+
+        var obj = {
+            doIt: function() {
+                console.log(this);
+            }
+        }
+
+        /*function doSomething(e) {
+            e.preventDefault();
+            // console.log(e);
+            console.log(this);
+        }*/
+
+        /*$("a").on('click', function(e) {
+            // this = obj object
+            // obj.doIt();
+            // this = anchor that was clicked
+            // obj.doIt.call(this);
+            obj.doIt.apply(this);
+
+            e.preventDefault();
+        });*/
+
+        // $('a').on('click', obj.doIt);
+        $('a').on('click', $.proxy(obj.doIt, obj));
+    </script>
+</body>
+</html>

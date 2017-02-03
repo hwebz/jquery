@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        ul li { color: red; }
+        .emphasis { font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <ul>
+        <li>hello</li>
+        <li>hello</li>
+    </ul>
+
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        var lists = jQuery('ul li');
+        console.log(lists);
+
+        jQuery('ul li').css('color', 'green').filter("li:first-child").addClass('emphasis');
+    </script>
+</body>
+</html>

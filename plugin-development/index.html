@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Deferreds</title>
+    
+</head>
+<body>
+
+    <h1>My Tweets</h1>
+    <ul class="tweets">
+        
+    </ul>
+
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="searchTwitter.jquery.js"></script>
+
+    <script>
+        // This plugin allows to change option
+        //$.fn.queryTwitter.options.limit = 3;
+
+        $('ul.tweets').queryTwitter('jeffrey_way');
+        /*$('ul.tweets').queryTwitter({
+            // search: '@jeffrey_way OR @tutspremium',
+            search: 'CNN'
+            limit: 3,
+            refresh: 4000,
+            transition: 'slideToggle',
+            wrapEachWith: '<p></p>',
+            onComplete: function() {
+                console.log('all done');
+            }
+        });*/
+    </script>
+</body>
+</html>

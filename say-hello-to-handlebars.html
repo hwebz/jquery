@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        span {
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <ul class="tweets">
+        <script id="template" type="text/x-handlebars-template">
+            {{#each this}}
+                <li>
+                    <h2>{{fullName author}}{{#if age}} - <span>{{age}}</span>{{/if}}</h2>
+                    <p>{{{tweet}}}</p>
+
+                    <!-- {{#unless quote}}
+                        <h5>Author does not have a quote</h5>
+                    {{/unless}} -->
+                    {{#if quote}}
+                        <h5>{{quote}}</h5>
+                    {{else}}
+                        <h5>Author does not have a quote.</h5>
+                    {{/if}}
+                </li>
+            {{/each}}
+        </script>
+    </ul>
+
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    
+    <script type="text/javascript">
+        (function($) {
+            var data = [
+                {
+                    author: { firstname: 'Jeffrey', lastname: 'Way' },
+                    tweet: '30 days to learn jquery rocks',
+                    age: 27
+                },
+                {
+                    author: { firsname: 'John', lastname: 'Doe' },
+                    tweet: '<strong>30 days</strong> to learn jquery rocks',
+                    quote: 'A quote from John doe'
+                }
+            ];
+
+            Handlebars.registerHelper('fullName', function(author) {
+                return author.firstname + ' ' + author.lastname;
+            });
+
+            var template = Handlebars.compile($("#template").html());
+            $("ul.tweets").append(template(data));
+        })(jQuery);
+    </script>
+</body>
+</html>

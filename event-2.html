@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="event2.css">
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+
+    <dl>
+    	<dt>What are your hours?</dt>
+    	<dd>We are open 24/7.</dd>
+    	<dt>What are your hours?</dt>
+    	<dd>We are open 24/7.</dd>
+    	<dt>What are your hours?</dt>
+    	<dd>We are open 24/7.</dd>
+    	<dt>What are your hours?</dt>
+    	<dd>We are open 24/7.</dd>
+    	<dt>What are your hours?</dt>
+    	<dd>We are open 24/7.</dd>
+    	<dt>What are your hours?</dt>
+    	<dd>We are open 24/7.</dd>
+    	<dt>What are your hours?</dt>
+    	<dd>We are open 24/7.</dd>
+    </dl>
+
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    
+    <script type="text/javascript">
+        (function() {
+            var dd = $('dd');
+
+            // dd.hide();
+            // dd.show();
+            // dd.fadeIn();
+            // dd.slideDown();
+            // dd.toggle();
+            dd.filter(":nth-child(n+4)").addClass('hide');
+
+            // $("dt").hover(function() {
+            $("dt").on('mouseenter', function() {
+            	$(this).next().slideDown(500).siblings('dd').slideUp(500);
+            	// $(this).next().show();	
+            });
+        })();
+    </script>
+</body>
+</html>

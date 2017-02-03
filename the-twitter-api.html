@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        .tweets { list-style: none; }
+        .tweets li {
+            display: inline-block;
+            width: 200px;
+            padding: 15px;
+            background: #eee;
+            margin: 5px;
+            border-radius: 15px;
+            transition: box-shadow .2s ease-in;
+            vertical-align: top;
+        }
+
+        .tweets li:hover {
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .tweets a {
+            text-decoration: none;
+            color: #262626;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .tweets li p {
+            margin: 10px 0;
+        }
+
+        .tweets li img {
+            max-width: 100%;
+        }
+
+        #sources, #sources option {
+            width: 100%;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <script id="tweets-template" type="text/x-handlebars-template">
+        {{#each this}}
+            <li>
+                <a href="{{detailUrl}}">
+                    <h2>{{title}}</h2>
+                    <p>{{author}} - {{publishedDate}}</p>
+                    <img src="{{thumbnail}}" alt="{{title}}">
+                    <p>{{description}}</p>
+                </a>
+            </li>
+        {{/each}}
+    </script>
+    <div class="sources">
+        <select name="sources" id="sources">
+            <option value="abc-news-au">ABC Australian Brodcasting Corporation</option>
+            <option value="ars-technica">Ars Technica</option>
+            <option value="associated-press">Associated Press</option>
+            <option value="bbc-news">BBC News</option>
+            <option value="bbc-sport">BBC Sport</option>
+            <option value="bild">Bild</option>
+            <option value="bloomberg">Bloomberg</option>
+            <option value="business-insider">Business Insider</option>
+            <option value="business-insider-uk">Business Insider UK</option>
+            <option value="buzzfeed">Buzz Feed</option>
+            <option value="cnbc">CNBC</option>
+            <option value="cnn">CNN</option>
+            <option value="daily-mail">Daily Mail</option>
+            <option value="der-tagesspiegel">Der Tagesspiegel</option>
+            <option value="espn">ESPN</option>
+            <option value="focus">Focus</option>
+            <option value="football-italia">Football Italia</option>
+            <option value="google-news">Google News</option>
+            <option value="fox-sports">FOX Sports</option>
+            <option value="fortune">Fortune</option>
+            <option value="national-geographic">National Geographic</option>
+            <option value="new-york-magazine">New York Magazine</option>
+            <option value="the-wall-street-journal">The Wall Street Journal</option>
+            <option value="time">Time</option>
+            <option value="the-washington-post">The Washington Post</option>
+        </select>
+    </div>
+    <ul class="tweets">
+        
+    </ul>
+
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    
+    <script type="text/javascript">
+        (function($) {
+            var NewsAPI = {
+                init: function(config) {
+                    // if http it will raise an error "Cross-Origin" -> add &callback=? to url
+                    this.url = 'https://newsapi.org/v1/articles?source='+ (config.query || 'bbc-news') +'&sortBy=top&apiKey=418d54751e6c4554955ad3e999302dbb';
+                    this.template = config.template;
+                    this.container = config.container;
+                    this.fetch();
+
+                    $.when();
+                },
+
+                attachTemplate: function() {
+                    console.log(this.articles);
+                    var template = Handlebars.compile(this.template);
+                    this.container.empty().append(template(this.articles));
+                },
+
+                fetch: function() {
+                    var self = this;
+                    $.getJSON(this.url, function(data) {
+                        self.articles = $.map(data.articles, function(article) {
+                            return {
+                                author: article.author,
+                                description: article.description,
+                                publishedDate: article.publishedAt,
+                                title: article.title,
+                                detailUrl: article.url,
+                                thumbnail: article.urlToImage
+                            };
+                        });
+
+                        self.attachTemplate();
+                    });
+                }
+            }
+
+            $('#sources').change(function(e) {
+                e.preventDefault();
+                NewsAPI.init({
+                    template: $("#tweets-template").html(),
+                    container: $("ul.tweets"),
+                    query: $(this).val()
+                });
+            }).trigger('change');
+        })(jQuery);
+    </script>
+</body>
+</html>

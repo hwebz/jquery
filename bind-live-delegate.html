@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bind...Live...Delegate...On...Dang That's Confusing</title>
+</head>
+<body>
+
+    <div class="first">
+        <h1>First Container</h1>
+        <h2>Click Me</h2>
+        <h2>Click Me</h2>
+        <h2>Click Me</h2>
+    </div>
+    
+    <div class="second">
+        <h1>Second Container</h1>
+        <h2>Click Me</h2>
+        <h2>Click Me</h2>
+        <h2>Click Me</h2>
+    </div>
+
+    <div class="third">
+        <h1>Third Container</h1>
+        <h2>Click Me</h2>
+        <h2>Click Me</h2>
+        <h2>Click Me</h2>
+    </div>
+
+    <div class="fourth">
+        <h1>Fourth Container</h1>
+        <h2>Click Me</h2>
+        <h2>Click Me</h2>
+        <h2>Click Me</h2>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    
+    <script type="text/javascript">
+        (function() {
+            // BIND
+            $('.first h2').bind('click', function() {
+                console.log('clicked BIND');
+                $(this).clone(true).appendTo('.first'); // clone(true) to clone element + event
+            });
+
+            // LIVE
+            $('.second h2').live('click', function() { // Now event is not own of h2. it's global. So when you clone ele, it will attack to new ele automatically if ele = selector
+                console.log('clicked LIVE');
+                $(this).clone().appendTo('.second'); 
+            });
+
+            // LIVE WITHIN CONTAINER
+            $('h2', $('.third')[0]).live('click', function() {
+                console.log('clicked LIVE in Container');
+                $(this).clone().appendTo('.third');
+            });
+
+            // DELEGATE
+            $('.fourth').delegate('h2', 'click', function() {
+                console.log('clicked DELEGATE');
+                $(this).clone().appendTo('.fourth');
+            });
+
+            // All of above functions point to on(), off() method
+        })();
+    </script>
+</body>
+</html>

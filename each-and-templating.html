@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+
+    <a href="#" class="myClass">Click Me</a>
+
+    <script id="blogTemplate" type="tuts/template">
+        <h2>{{title}}</h2>
+        <img src={{thumbnail}} alt={{title}}>
+    </script>
+
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    
+    <script type="text/javascript">
+        (function($) {
+            var content = [
+                {
+                    title: 'My awesome blog post',
+                    thumbnail: 'http://designrfix.com/wp-content/uploads/2010/01/free-icons-resource-list-post.jpg'
+                },
+                {
+                    title: 'My second awesome blog post',
+                    thumbnail: 'http://www.webpresencesolutions.net/files/2016/09/Promote-Blog-Posts-2.jpg'
+                }
+            ],
+            template = $.trim($("#blogTemplate").html()),
+            frag = '';
+
+            $.each(content, function(index, obj) {
+                frag += template
+                            .replace(/{{title}}/ig, obj.title)
+                            .replace(/{{thumbnail}}/ig, obj.thumbnail);
+            });
+
+            $(document.body).append(frag);
+        })(jQuery);
+    </script>
+</body>
+</html>

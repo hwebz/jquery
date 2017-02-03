@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Deferreds</title>
+    <style>
+    	.box {
+		    width: 200px;
+		    height: 200px;
+		    display: inline-block;
+		    margin-right: 3em;
+		    background: green;
+	    }
+    </style>
+</head>
+<body>
+
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        /*var myVar;
+
+        var setVal = function() {
+        	// If you want to deferred some task, just use jQuery Deferred
+        	var deferred = $.Deferred();
+
+        	setTimeout(function() {
+        		myVar = 'my value';
+        		deferred.reject();
+        		// deferred.resolve();
+        	}, 2000);
+
+        	return deferred.promise();
+        };
+
+        // If you pass one func() default is: success
+        // two func(): success, fail
+        setVal().then(
+        	function() {
+        		console.log('all done: ' + myVar);
+        	},
+        	function() {
+        		console.log('failed')
+        	}
+        );
+
+        // setVal().then(function() {
+        // 	// success
+        // }).fail(function() {
+        // 	// fail
+        // });*/
+
+        /*$.searchNews = function(search) {
+        	var dfd = $.Deferred();
+
+        	$.ajax({
+        		url: 'http://search.twitter.com/search.json',
+        		data: {q: search},
+        		dataType: 'jsonp',
+        		success: dfd.resolve,
+        		error: dfd.reject
+        	});
+
+        	return dfd.promise();
+
+        	// return $.ajax({
+        	// 	url: 'http://search.twitter.com/search.json',
+        	// 	data: {q: search},
+        	// 	dataType: 'jsonp'
+        	// }).promise();
+        };
+
+        var outer = $.searchNews('cats');
+
+        // Can call multiple callbacks
+        outer.then(function(results) {
+        	console.log(results);
+        });
+
+        outer.then(function() {
+        	console.log('another callback');
+        });*/
+
+        /*$('div.box').each(function(i) {
+        	$(this).delay(1000 * i++).fadeOut(1000);
+        }).promise().done(function() {
+        	console.log('All animations have fired.');
+        });*/
+
+        function getTweets(search) {
+        	return $.ajax({
+        		url: 'https://api.twitter.com/1.1/search/tweets.json',
+        		data: { q: search },
+        		dataType: 'jsonp'
+        	});
+        }
+
+        $.when(getTweets('dogs'), getTweets('cats')).done(function(result1, result2) {
+        	console.log(result1);
+        	console.log(result2);
+        });
+    </script>
+</body>
+</html>
